@@ -1,0 +1,25 @@
+<% if current_user %>
+<div id="createOrion" class="panel right">
+    <h1>Create a Orion</h1>
+    <p>
+    <%= form_for @orion do |f| %>
+        <%= f.text_area :content, class: 'orionText' %>
+        <%= f.submit "Orion!" %>
+    <% end %>
+    </p>
+</div>
+<% end %>
+<div class="panel left">
+    <h1>Buddies' orion</h1>
+    <% @orion.each do |orion| %>
+        <div class="ribbitWrapper">
+            <a href="<%= user_path orion.user %>">
+            <img class="avatar" src="<%= orion.user.avatar_url %>">
+            <span class="name"><%= orion.user.name %></span>
+            </a>
+            @<%= orion.user.username %>
+            <span class="time"><%= time_ago_in_words(orion.created_at) %></span>
+            <p> <%= orion.content %> </p>
+        </div>
+    <% end %>
+</div>
